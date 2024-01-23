@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp1.Controllers;
 
 namespace WpfApp1
 {
@@ -24,5 +25,10 @@ namespace WpfApp1
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ZakController newObj = new ZakController();
+            newObj.AddZak(idOrder)
     }
 }

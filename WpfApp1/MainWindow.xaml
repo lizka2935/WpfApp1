@@ -19,7 +19,7 @@
             <ComboBox Height="19" Width="144" />
             <Label Content="Стоимость пончика"/>
             <TextBox TextWrapping="Wrap" Text=""  Height="24" Width="156" Margin="10"/>
-            <Button Content="Добавить заказ" Height="29" Width="128" RenderTransformOrigin="0.514,1.25" />
+            <Button Content="Добавить заказ" Height="29" Width="128" RenderTransformOrigin="0.514,1.25" Click="Button_Click" />
 
         </StackPanel>
         <StackPanel Grid.Column="1">
