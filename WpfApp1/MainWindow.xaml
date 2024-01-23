@@ -14,9 +14,9 @@
         <StackPanel Grid.Column="0">
             <Label Content="Oформление заявки "/>
             <Label Content="Серийник технки"/>
-            <TextBox x:Name="seria" Height="24" Width="156"/>
+            <TextBox x:Name="SeriaTextBox" Height="24" Width="156"/>
             <Label Content="Вид услуги"/>
-            <ComboBox Height="19" Width="144" />
+            <ComboBox  Height="19" Width="144" />
             <Label Content="Стоимость пончика"/>
             <TextBox TextWrapping="Wrap" Text=""  Height="24" Width="156" Margin="10"/>
             <Button Content="Добавить заказ" Height="29" Width="128" RenderTransformOrigin="0.514,1.25" Click="Button_Click" />
