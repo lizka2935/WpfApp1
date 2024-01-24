@@ -24,7 +24,7 @@
         </StackPanel>
         <StackPanel Grid.Column="1">
             <Label Content="Все заказы"/>
-            <ListBox x:Name="Lx" Height="318" Width="460" Margin="10" BorderBrush="Black" />
+            <ListBox x:Name="Lx" Height="318" Width="460" Margin="10" BorderBrush="Black" SelectionChanged="Lx_SelectionChanged" />
             
             <Button Content="Сохранить заказ в файл" Height="54" Width="304" Click="Button_Click_1"/>
 

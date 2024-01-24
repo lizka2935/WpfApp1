@@ -55,5 +55,10 @@ namespace WpfApp1
         {
 
         }
+
+        private void Lx_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
