@@ -14,18 +14,11 @@ namespace WpfApp1.Model
     
     public partial class zak
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public zak()
-        {
-            this.servis = new HashSet<servis>();
-        }
-    
         public int id { get; set; }
         public int id_servis { get; set; }
         public string seria { get; set; }
         public decimal prais { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<servis> servis { get; set; }
+        public virtual servis servis { get; set; }
     }
 }

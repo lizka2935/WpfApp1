@@ -8,6 +8,8 @@ namespace WpfApp1.Model
 {
    public class Core
     {
-        public zakazEntities context = new zakazEntities();
+        public zakazEntities1 context = new zakazEntities1();
+
+        
     }
 }

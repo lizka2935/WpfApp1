@@ -13,10 +13,10 @@ namespace WpfApp1.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class zakazEntities : DbContext
+    public partial class zakazEntities1 : DbContext
     {
-        public zakazEntities()
-            : base("name=zakazEntities")
+        public zakazEntities1()
+            : base("name=zakazEntities1")
         {
         }
     
@@ -25,7 +25,7 @@ namespace WpfApp1.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<zak> zak { get; set; }
         public virtual DbSet<servis> servis { get; set; }
+        public virtual DbSet<zak> zak { get; set; }
     }
 }

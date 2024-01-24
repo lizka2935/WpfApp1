@@ -14,19 +14,19 @@
         <StackPanel Grid.Column="0">
             <Label Content="Oформление заявки "/>
             <Label Content="Серийник технки"/>
-            <TextBox x:Name="SeriaTextBox" Height="24" Width="156"/>
+            <TextBox x:Name="SeriaTextBox" Height="24" Width="156" TextChanged="SeriaTextBox_TextChanged"/>
             <Label Content="Вид услуги"/>
-            <ComboBox  Height="19" Width="144" />
-            <Label Content="Стоимость пончика"/>
-            <TextBox TextWrapping="Wrap" Text=""  Height="24" Width="156" Margin="10"/>
+            <ComboBox  x:Name="ServisComboBox" Height="19" Width="144" SelectionChanged="ComboBox_SelectionChanged" />
+            <Label   Content="Стоимость пончика"/>
+            <TextBox x:Name="PraiseTextBox" TextWrapping="Wrap" Text=""  Height="24" Width="156" Margin="10"/>
             <Button Content="Добавить заказ" Height="29" Width="128" RenderTransformOrigin="0.514,1.25" Click="Button_Click" />
 
         </StackPanel>
         <StackPanel Grid.Column="1">
             <Label Content="Все заказы"/>
-            <ListBox Height="318" Width="460" Margin="10" BorderBrush="Black" />
+            <ListBox x:Name="Lx" Height="318" Width="460" Margin="10" BorderBrush="Black" />
             
-            <Button Content="Сохранить заказ в файл" Height="54" Width="304"/>
+            <Button Content="Сохранить заказ в файл" Height="54" Width="304" Click="Button_Click_1"/>
 
         </StackPanel>
     </Grid>

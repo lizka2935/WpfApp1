@@ -20,7 +20,7 @@ namespace WpfApp1.Controllers
         /// <param name="servis"></param>
         /// <param name="prais"></param>
         /// <returns></returns>
-        public bool AddZak(int idOrder, string seria, string servis,decimal prais)
+        public bool AddZak( string seria, int servis,decimal prais)
         {
             try
 
@@ -29,7 +29,7 @@ namespace WpfApp1.Controllers
                 {
                   
                     seria = seria,
-                    servis = servis,
+                    id_servis = servis,
                     prais = prais
                 };
 

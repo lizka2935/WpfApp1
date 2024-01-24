@@ -4,115 +4,111 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище zakazModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "zakaz.dbo.servis" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+      <Schema Namespace="Хранилище zakazModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="servis">
           <Key>
             <PropertyRef Name="id_servis" />
-            <PropertyRef Name="vid" />
           </Key>
-          <Property Name="id_servis" Type="int" Nullable="false" />
+          <Property Name="id_servis" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="vid" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="zak">
           <Key>
-            <PropertyRef Name="id_servis" />
+            <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_servis" Type="int" Nullable="false" />
           <Property Name="seria" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="prais" Type="money" Nullable="false" />
         </EntityType>
-        <Association Name="FK_servis_zak">
-          <End Role="zak" Type="Self.zak" Multiplicity="1" />
-          <End Role="servis" Type="Self.servis" Multiplicity="*" />
+        <Association Name="FK_zak_servis">
+          <End Role="servis" Type="Self.servis" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="zak" Type="Self.zak" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="zak">
+            <Principal Role="servis">
               <PropertyRef Name="id_servis" />
             </Principal>
-            <Dependent Role="servis">
+            <Dependent Role="zak">
               <PropertyRef Name="id_servis" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Хранилище zakazModelContainer">
+          <EntitySet Name="servis" EntityType="Self.servis" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="zak" EntityType="Self.zak" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="servis" EntityType="Self.servis" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [servis].[id_servis] AS [id_servis], 
-    [servis].[vid] AS [vid]
-    FROM [dbo].[servis] AS [servis]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="FK_servis_zak" Association="Self.FK_servis_zak">
-            <End Role="zak" EntitySet="zak" />
+          <AssociationSet Name="FK_zak_servis" Association="Self.FK_zak_servis">
             <End Role="servis" EntitySet="servis" />
+            <End Role="zak" EntitySet="zak" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="zakazModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="zakazEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="zak" EntityType="zakazModel.zak" />
-          <EntitySet Name="servis" EntityType="zakazModel.servis" />
-          <AssociationSet Name="FK_servis_zak" Association="zakazModel.FK_servis_zak">
-            <End Role="zak" EntitySet="zak" />
-            <End Role="servis" EntitySet="servis" />
-          </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="zak">
-          <Key>
-            <PropertyRef Name="id_servis" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_servis" Type="Int32" Nullable="false" />
-          <Property Name="seria" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="prais" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <NavigationProperty Name="servis" Relationship="zakazModel.FK_servis_zak" FromRole="zak" ToRole="servis" />
-        </EntityType>
         <EntityType Name="servis">
           <Key>
             <PropertyRef Name="id_servis" />
-            <PropertyRef Name="vid" />
           </Key>
-          <Property Name="id_servis" Type="Int32" Nullable="false" />
-          <Property Name="vid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="zak" Relationship="zakazModel.FK_servis_zak" FromRole="servis" ToRole="zak" />
+          <Property Name="id_servis" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="vid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="zak" Relationship="Self.FK_zak_servis" FromRole="servis" ToRole="zak" />
         </EntityType>
-        <Association Name="FK_servis_zak">
-          <End Type="zakazModel.zak" Role="zak" Multiplicity="1" />
-          <End Type="zakazModel.servis" Role="servis" Multiplicity="*" />
+        <EntityType Name="zak">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_servis" Type="Int32" Nullable="false" />
+          <Property Name="seria" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="prais" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="servis" Relationship="Self.FK_zak_servis" FromRole="zak" ToRole="servis" />
+        </EntityType>
+        <Association Name="FK_zak_servis">
+          <End Role="servis" Type="Self.servis" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="zak" Type="Self.zak" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="zak">
+            <Principal Role="servis">
               <PropertyRef Name="id_servis" />
             </Principal>
-            <Dependent Role="servis">
+            <Dependent Role="zak">
               <PropertyRef Name="id_servis" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="zakazEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="servis" EntityType="Self.servis" />
+          <EntitySet Name="zak" EntityType="Self.zak" />
+          <AssociationSet Name="FK_zak_servis" Association="Self.FK_zak_servis">
+            <End Role="servis" EntitySet="servis" />
+            <End Role="zak" EntitySet="zak" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище zakazModelContainer" CdmEntityContainer="zakazEntities">
-          <EntitySetMapping Name="zak">
-            <EntityTypeMapping TypeName="zakazModel.zak">
-              <MappingFragment StoreEntitySet="zak">
-                <ScalarProperty Name="prais" ColumnName="prais" />
-                <ScalarProperty Name="seria" ColumnName="seria" />
-                <ScalarProperty Name="id_servis" ColumnName="id_servis" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+        <EntityContainerMapping StorageEntityContainer="Хранилище zakazModelContainer" CdmEntityContainer="zakazEntities1">
           <EntitySetMapping Name="servis">
             <EntityTypeMapping TypeName="zakazModel.servis">
               <MappingFragment StoreEntitySet="servis">
-                <ScalarProperty Name="vid" ColumnName="vid" />
                 <ScalarProperty Name="id_servis" ColumnName="id_servis" />
+                <ScalarProperty Name="vid" ColumnName="vid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="zak">
+            <EntityTypeMapping TypeName="zakazModel.zak">
+              <MappingFragment StoreEntitySet="zak">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_servis" ColumnName="id_servis" />
+                <ScalarProperty Name="seria" ColumnName="seria" />
+                <ScalarProperty Name="prais" ColumnName="prais" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
